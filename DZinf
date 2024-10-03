@@ -1,0 +1,30 @@
+def north_west_corner(supply, demand):
+    distribution = [[0 for _ in range(len(demand))] for _ in range(len(supply))]
+    
+    i, j = 0, 0
+    
+    while i < len(supply) and j < len(demand):
+        allocated = min(supply[i], demand[j])
+        distribution[i][j] = allocated
+        
+        supply[i] -= allocated
+        demand[j] -= allocated
+        
+        if supply[i] == 0:
+            i += 1
+        if demand[j] == 0:
+            j += 1
+            
+    return distribution
+
+
+supply = [1000, 1500, 700]  
+demand = [1200, 1000, 1000]
+
+
+result = north_west_corner(supply, demand)
+
+
+print("Распределение товаров:")
+for row in result:
+    print(row)
